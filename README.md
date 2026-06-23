@@ -69,6 +69,9 @@ AudioService (bound Service — standalone APK)
               ▼
          RangeFinderJNI → librangefinder.so (C++17 / NDK)
            Goertzel multi-bin → Doppler shift → distanceChange float
+            For each sample x[n] in the rec buffer:
+                s[n] = x[n] + 2·cos(2π·f/Fs) · s[n-1] − s[n-2]
+                Power at f = s[N-1]² + s[N-2]² − 2·cos(2π·f/Fs)·s[N-1]·s[N-2]
               │
               ▼
          Queue[30] → outlier filter → PRESENT / ABSENT
